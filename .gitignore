@@ -1,3 +1,5 @@
 /work
 /docker
 /.vscode
+.env
+.env.local

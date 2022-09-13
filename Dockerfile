@@ -3,6 +3,8 @@ FROM node:16-bullseye-slim
 ADD files/nuxt-create.sh /opt/
 ADD files/firebase.json /opt/
 ADD files/nuxt.config.ts /opt/
+ADD files/firebase.client.ts /opt/
+ADD files/env /opt/
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \

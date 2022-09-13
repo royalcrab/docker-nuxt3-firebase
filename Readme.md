@@ -7,8 +7,10 @@
 ├─Dockerfile
 ├─docker-compose.yml
 └─files
-   ├─nuxt-create.sh
+   ├─env
+   ├─firebase.client.ts
    ├─firebase.json
+   ├─nuxt-create.sh
    └─nuxt.config.ts
 ```
 
@@ -18,11 +20,15 @@
 
 ## Build
 
+最初の1回目だけ実行する。Docker の image が作成される。
+
 ```
 $ docker compose build
 ```
 
 ## Create New Nuxt3 Project
+
+最初の1回目だけ実行する。
 
 ```
 $ docker compose run --rm create
@@ -30,26 +36,32 @@ $ docker compose run --rm create
 
 これで、./work 以下にプロジェクトが作成される。 work 以下はだいたい下記のようになっているはず。
 
+
 ```
 .
 └─work
+    ├─.env
     ├─.nuxt
+    │  └─この下には大量のファイル
     ├─.output
     │  └─public
     ├─node_modules
+    │  └─この下には大量のファイル
     ├─.gitignore
-    ├─ui-debug.log
     ├─app.vue
     ├─firebase.json
-    ├─firestore.indexes.json
-    ├─firestore.rules
     ├─nuxt.config.ts
     ├─package.json
+    ├─plugins
+    │  └─firebse.client.ts
     ├─README.md
-    ├─storage.rules
     ├─tsconfig.json
     └─yarn.lock
 ```
+
+git を使ってバージョン管理をする場合は work のフォルダ内で `git init` する。
+このとき、Dockerfile のあるフォルダに .git フォルダがあるとエラーになる。
+必要に応じて削除しておく。
 
 ## Test Project
 
@@ -115,37 +127,33 @@ firebase.json のエミュレータの各項目に "host":"0.0.0.0" を追加す
       "enabled": true
     }
   }
-  ```
+```
 
-  この状態で、下記を実行する。
+この状態で、下記を実行する。
 
-  ```
-  $ docker compose up emu
-  ```
-  
-  ## Build / Deploy
-  
-  ```
-  $ docker compose exec sh yarn build
-  $ docker compose exec sh firebase deploy
-  ```
-  
-  `exec` が失敗するときは、先に下記をやっておく。
-  
-  ```
-  $ docker compose up sh -d
-  ```
-  
-  # Git
-  
-  プロジェクトの管理目的に git を使い場合は /work のフォルダ内で使うこと。
+```
+$ docker compose up emu
+```
 
-  # 何かおかしくなったら
-  
-  ```
-  $ docker compose down
-  $ docker compose up sh -d
-  ```
+## Build / Deploy
 
-  とやると、たぶん直る（はず）。
+```
+$ docker compose exec sh yarn build
+$ docker compose exec sh firebase deploy
+```
+
+`exec` が失敗するときは、先に下記をやっておく。
+
+```
+$ docker compose up sh -d
+```
+
+# 何かおかしくなったら
+
+```
+$ docker compose down
+$ docker compose up sh -d
+```
+
+とやると、たぶん直る（はず）。
 
