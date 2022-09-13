@@ -71,6 +71,10 @@ $ docker compose up dev
 
 http://localhsot:3000 を開いて Nuxt3 のページが表示されたらOK
 
+Control + C で停止させたときは、その直後に 
+`docker compose down dev` としておく。そうしないと、
+動いてないコンテナが大量に残ってしまう。
+
 ## firebase init
 
 最初に１回だけ必要。
@@ -134,6 +138,10 @@ firebase.json のエミュレータの各項目に "host":"0.0.0.0" を追加す
 ```
 $ docker compose up emu
 ```
+
+Control + C で停止させたときは、その直後に 
+`docker compose down emu` としておく。そうしないと、
+動いてないコンテナが大量に残ってしまう。
 
 ## Build / Deploy
 
