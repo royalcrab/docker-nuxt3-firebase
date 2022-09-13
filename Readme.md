@@ -118,9 +118,22 @@ firebase.json のエミュレータの各項目に "host":"0.0.0.0" を追加す
   ```
   $ docker compose up emu
   ```
+  
+  ## Build / Deploy
+  
+  ```
+  $ docker compose exec sh yarn build
+  $ docker compose exec sh firebase deploy
+  ```
+  
+  `exec` が失敗するときは、先に下記をやっておく。
+  
+  ```
+  $ docker compose up sh -d
+  ```
 
-  ## 何かおかしくなったら
-
+  # 何かおかしくなったら
+  
   ```
   $ docker compose down
   $ docker compose up sh -d
