@@ -12,6 +12,10 @@
    └─nuxt.config.ts
 ```
 
+ファイルは、github のページの右上の Code のところにある Download ZIP で取得できる。
+
+![Download ZIP](images/image1.png)
+
 ## Build
 
 ```
