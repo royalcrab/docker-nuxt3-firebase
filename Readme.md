@@ -131,6 +131,10 @@ firebase.json のエミュレータの各項目に "host":"0.0.0.0" を追加す
   ```
   $ docker compose up sh -d
   ```
+  
+  # Git
+  
+  プロジェクトの管理目的に git を使い場合は /work のフォルダ内で使うこと。
 
   # 何かおかしくなったら
   
