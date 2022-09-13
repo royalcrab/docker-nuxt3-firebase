@@ -16,9 +16,9 @@ services:
       - ./work:/work:cached
     working_dir: /work
     ports:
-      - 3000:3000
+      - "3000:3000"
     # for hot reload 
-      - 24678:24678
+      - "24678:24678"
     tty: true
     environment:
       - HOST=0.0.0.0
@@ -31,8 +31,11 @@ services:
     build: .
     volumes:
       - ./work:/work:cached
+      # for firebase
+      - ./docker/bin/:/root/.cache:cached
+      - ./docker/config/:/root/.config:cached
     working_dir: /work
-    command: bash
+    tty: true
   
   emu:
     build: .
@@ -43,15 +46,15 @@ services:
       - ./docker/config/:/root/.config:cached
     working_dir: /work
     ports:
-    # for emulators
-    - "5001:5001"
-    - "9099:9099"
-    - "8080:8080"
-    - "5000:5000"
-    - "9199:9199"
-    - "4000:4000"
-    - "4400:4400"
-    - "4500:4500"
+      # for emulators
+      - "5001:5001"
+      - "9099:9099"
+      - "8080:8080"
+      - "5000:5000"
+      - "9199:9199"
+      - "4000:4000"
+      - "4400:4400"
+      - "4500:4500"
     command: firebase emulators:start
 
 

@@ -1,2 +1,3 @@
-./work
-./docker
+/work
+/docker
+/.vscode
