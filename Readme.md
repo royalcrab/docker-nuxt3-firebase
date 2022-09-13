@@ -2,10 +2,15 @@
 
 プロジェクトを作成したいフォルダ以下に、下記ファイルを置く。
 
-Dockerfile
-docker-compose.yml
-files
-└─ nuxt-create.sh 
+```
+.
+├─Dockerfile
+├─docker-compose.yml
+└─files
+   ├─nuxt-create.sh
+   ├─firebase.json
+   └─nuxt.config.ts
+```
 
 ## Build
 
@@ -19,7 +24,28 @@ $ docker compose build
 $ docker compose run --rm create
 ```
 
-これで、./work 以下にプロジェクトが作成される。
+これで、./work 以下にプロジェクトが作成される。 work 以下はだいたい下記のようになっているはず。
+
+```
+.
+└─work
+    ├─.nuxt
+    ├─.output
+    │  └─public
+    ├─node_modules
+    ├─.gitignore
+    ├─ui-debug.log
+    ├─app.vue
+    ├─firebase.json
+    ├─firestore.indexes.json
+    ├─firestore.rules
+    ├─nuxt.config.ts
+    ├─package.json
+    ├─README.md
+    ├─storage.rules
+    ├─tsconfig.json
+    └─yarn.lock
+```
 
 ## Test Project
 
@@ -34,10 +60,11 @@ http://localhsot:3000 を開いて Nuxt3 のページが表示されたらOK
 最初に１回だけ必要。
 
 ```
-$ docker compose run --rm sh
+$ docker compose up sh -d
+$ docker compose exec sh firebase login --no-localhost
 
-# firebase login --no-localhost
 ...
+
 2. Visit the URL below on any device and follow the instructions to get your code:
 
 https://auth.firebase.tools/login?code_challenge=xxxxxxxxxxxxxxxxxx
@@ -51,19 +78,15 @@ https://auth.firebase.tools/login?code_challenge=xxxxxxxxxxxxxxxxxx
 そして、google アカウントでログインすると、認証コードが表示されるので、それを 3 の
 Enter authorization code: の後ろにコピペする。
 
-認証ができたら、
+## firebase init
 
 ```
-$ exit
+$ docker compose exec sh firebase init
 ```
-
-としてコンテナを抜ける。
 
 ## start firebase emulators
 
-emulators
-
-"host":"0.0.0.0" を各項目に追加する。
+firebase.json のエミュレータの各項目に "host":"0.0.0.0" を追加する。すでに追加されている場合は、しなくていい。
 
 ```firebase.json
   "emulators": {
@@ -89,3 +112,19 @@ emulators
     }
   }
   ```
+
+  この状態で、下記を実行する。
+
+  ```
+  $ docker compose up emu
+  ```
+
+  ## 何かおかしくなったら
+
+  ```
+  $ docker compose down
+  $ docker compose up sh -d
+  ```
+
+  とやると、たぶん直る（はず）。
+
