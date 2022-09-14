@@ -1,5 +1,5 @@
 version: '3.3'
-# 3.3 でなければならない
+# must be 3.3 
 
 services:
   create:
@@ -8,7 +8,7 @@ services:
       - ./:/work:cached
     working_dir: /work
     command: bash /opt/nuxt-create.sh
-    # nuxi init work && cd work && yarn add bootstrap @popperjs/core bootstrap-icon
+    # nuxi init work && cd work && yarn add bootstrap @popperjs/core bootstrap-icons
 
   dev:
     build: .
@@ -17,9 +17,8 @@ services:
     working_dir: /work
     ports:
       - "3000:3000"
-    # for hot reload 
+    # for HMR
       - "24678:24678"
-    tty: true
     environment:
       - HOST=0.0.0.0
       - port=3000
@@ -31,7 +30,7 @@ services:
     build: .
     volumes:
       - ./work:/work:cached
-      # for firebase
+      # for firebase init
       - ./docker/bin/:/root/.cache:cached
       - ./docker/config/:/root/.config:cached
     working_dir: /work
