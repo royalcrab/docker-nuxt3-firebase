@@ -104,6 +104,17 @@ Enter authorization code: の後ろにコピペする。
 $ docker compose exec sh firebase init
 ```
 
+.env ファイルを編集して、firebase の apiKey などの情報を追記する。
+
+```.env
+NUXT_FIREBASE_API_KEY=
+NUXT_FIREBASE_AUTH_DOMAIN=
+NUXT_FIREBASE_PROJECT_ID=
+NUXT_FIREBASE_STRAGE_BUCKET=
+NUXT_FIREBASE_MESSAGING_SENDER_ID=
+NUXT_FIREBASE_APP_ID=
+```
+
 ## start firebase emulators
 
 firebase.json のエミュレータの各項目に "host":"0.0.0.0" を追加する。すでに追加されている場合は、しなくていい。
