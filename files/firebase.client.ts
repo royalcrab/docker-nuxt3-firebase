@@ -30,10 +30,10 @@ export default defineNuxtPlugin(() => {
         //const storage = getStorage();
         //connectStorageEmulator(storage, "localhost", 9199);
 
-        //const db = getFirestore(firebase);
+        //const db = getFirestore();
         //connectFirestoreEmulator(db, 'localhost', 8080); 
 
-        //const functions = getFunctions(firebase);
+        //const functions = getFunctions();
         //connectFunctionsEmulator(functions, "localhost", 5001);
     }
 });
